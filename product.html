@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product - FASHION-Inspired Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>FASHION</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="categoryMen.html">Men</a>
+            <a href="categoryWomen.html">Women</a>
+            <a href="categoryKids.html">Kids</a>
+            <a href="categoryGirls.html">Girls</a>
+            <a href="categoryInfants.html">Infants</a>
+            <a href="cart.html" class="cart-link">Cart (<span id="cartCount">0</span>)</a>
+        </nav>
+    </header>
+
+    <!-- Product Detail Section -->
+    <main>
+        <body>
+            <div id="product-container">
+                <!-- Image will be dynamically set here -->
+                <img id="product-image" alt="Product Image" style="width: 750px;">
+            </div>
+        
+            <script>
+                // Function to get query parameters
+                function getQueryParams() {
+                    const params = new URLSearchParams(window.location.search);
+                    return {
+                        image: params.get('image'),
+                    };
+                }
+        
+                // Extract the image parameter and update the image
+                const productDetails = getQueryParams();
+                if (productDetails.image) {
+                    const productImage = document.getElementById('product-image');
+                    productImage.src = productDetails.image; // Set the image source
+                }
+            </script>
+        </body>
+            <div class="product-info">
+                <h1>Women Regular Fit Sweatshirt</h1>
+                <p>MRP ₹799</p>
+                <p>Use Code NEW250 for ₹250 off on orders above ₹990.</p>
+                <div class="size-selection">
+                    <label>Select Size:</label>
+                    <select id="sizeSelection">
+                        <option>XS</option>
+                        <option>S</option>
+                        <option>M</option>
+                        <option>L</option>
+                        <option>XL</option>
+                    </select>
+                </div>
+                <button id="addToBagButton">Add to Cart</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 FASHION-Inspired Store. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
+<script>
+    // script.js
+
+// Function to get query parameters
+function getQueryParams() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+        image: params.get('image'),
+        name: params.get('name'),
+        price: params.get('price')
+    };
+}
+
+// Populate product details
+function loadProductDetails() {
+    const productDetails = getQueryParams();
+
+    // Update the main image
+    const mainImage = document.getElementById('mainProductImage');
+    if (mainImage && productDetails.image) {
+        mainImage.src = productDetails.image;
+    }
+
+    // Update product name and price
+    const productName = document.querySelector('.product-info h1');
+    const productPrice = document.querySelector('.product-info p:first-of-type');
+    if (productName) productName.textContent = productDetails.name || 'Product Name';
+    if (productPrice) productPrice.textContent = `₹${productDetails.price || '0'}`;
+}
+
+// Load product details on page load
+document.addEventListener('DOMContentLoaded', loadProductDetails);
+
+</script>

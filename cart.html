@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - FASHION-Inspired Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>FASHION</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="categoryMen.html">Men</a>
+            <a href="categoryWomen.html">Women</a>
+            <a href="categoryKids.html">Kids</a>
+            <a href="categoryGirls.html">Girls</a>
+            <a href="categoryInfants.html">Infants</a>
+            <a href="cart.html" class="cart-link">Cart (<span id="cartCount">0</span>)</a>
+        </nav>
+    </header>
+
+    <!-- Cart Items Section -->
+    <main>
+        <section class="cart-items">
+            <h2>Your Cart</h2>
+            <div id="cartContents"></div>
+            <p>Total: ₹<span id="totalAmount">0</span></p>
+            <!-- Purchase Button -->
+            <button id="purchaseButton">Purchase</button>
+        </section>
+    </main>
+
+    <main>
+    <!-- Receipt Section -->
+        <section id="receiptSection" style="display: none;">
+            <h2>Receipt</h2>
+            <div id="receiptContents"></div>
+            <p>Total: ₹<span id="receiptTotalAmount">0</span></p>
+        </section>
+    </main>
+    
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 FASHION-Inspired Store. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
+<script>
+    const purchaseButton = document.getElementById("purchaseButton");
+
+// Add click event listener
+purchaseButton.addEventListener("click", () => {
+    // Show the popup message
+    alert("Purchased!");
+});
+</script>
+
+<script>
+    function displayReceipt() {
+    const receiptContents = document.getElementById("receiptContents");
+    const receiptTotalAmount = document.getElementById("receiptTotalAmount");
+
+    // Clear any existing receipt contents
+    receiptContents.innerHTML = "";
+
+    // Add cart items to the receipt
+    let total = 0;
+    cart.forEach(item => {
+        const itemPrice = parseInt(item.price.replace('₹', '').replace(',', ''));
+        total += itemPrice;
+
+        const itemElement = document.createElement("p");
+        itemElement.textContent = `${item.name} - ₹${item.price} (Size: ${item.size})`;
+        receiptContents.appendChild(itemElement);
+    });
+
+    // Display total amount in receipt
+    receiptTotalAmount.textContent = total.toLocaleString();
+
+    // Show the receipt section
+    document.getElementById("receiptSection").style.display = "block";
+}
+
+</script>
+<script>
+    // Add event listener for purchase
+document.getElementById("purchaseButton").addEventListener("click", () => {
+    alert("Purchased!");
+    displayReceipt();
+});
+
+</script>
